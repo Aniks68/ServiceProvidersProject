@@ -30,4 +30,6 @@ public class Restaurant {
     @Enumerated(EnumType.STRING)
     private CITY city;
 
+    private String logo;
+
 }
