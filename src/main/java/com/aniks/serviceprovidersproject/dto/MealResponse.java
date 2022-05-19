@@ -8,5 +8,6 @@ public class MealResponse {
     private String description;
     private Long price;
     private Long prepTime;
+    private String image;
     private String restaurantName;
 }
