@@ -9,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepository restaurantRepository;
@@ -35,5 +38,15 @@ public class RestaurantServiceImpl implements RestaurantService {
         final Restaurant newRestaurant = modelMapper.map(response, Restaurant.class);
         restaurantRepository.save(newRestaurant);
         return response;
+    }
+
+    @Override
+    public List<RestaurantResponse> getAll() {
+        List<Restaurant> restaurants = restaurantRepository.findAll();
+        List<RestaurantResponse> restaurantResponses = restaurants.stream()
+                .map(res -> modelMapper.map(res, RestaurantResponse.class))
+                .collect(Collectors.toList());
+
+        return restaurantResponses;
     }
 }
